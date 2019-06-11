@@ -3,6 +3,7 @@ package com.iesvc.acceso.modelo;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -31,6 +32,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @NamedQuery(
 		name = "Bitacora.findByFecha", 
 		query = "SELECT b FROM Bitacora b WHERE b.fecha = :fecha")
+/*
+@NamedQuery(name = "Bitacora.findByUser", 
+        query = "SELECT b FROM Bitacora b WHERE b.usuario=:usuario")
+        */
 
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Bitacora implements Serializable {
@@ -52,11 +57,11 @@ public class Bitacora implements Serializable {
 	@JsonBackReference
 	private Usuario usuarioBean;
 
+
 	public Bitacora() {
 	}
     
-	public Bitacora(int id, Time hora, Date fecha, String ip) {
-		super();
+	public Bitacora(int id, Time hora, Date fecha, String ip, List<Usuario> usuario) {
 		this.id = id;
 		this.hora = hora;
 		this.fecha = fecha;
@@ -66,7 +71,6 @@ public class Bitacora implements Serializable {
 	
 
 	public Bitacora(Time hora, Date fecha, String ip) {
-		super();
 		this.hora = hora;
 		this.fecha = fecha;
 		this.ip = ip;
